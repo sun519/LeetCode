@@ -1,0 +1,43 @@
+题目描述:找出超过数组二分之一长度的数组元素
+
+// 法一 常规方法
+var majorityElement = function(nums) {
+    var h = {};
+    for(var i = 0;i < nums.length;i++) {
+        h[nums[i]] = h[nums[i]] + 1 || 1;
+        if(h[nums[i]] >= nums.length/2) {
+            return nums[i];
+        }
+    }
+};
+
+console.time("t");
+console.log(majorityElement([3,4,2,4,5,5,3,2,54,54,2,2,1]));
+console.timeEnd("t");
+
+
+// 法二  方法比较巧妙
+var majorityElement = function(nums) {
+    var count = 1;
+    var major = nums[0];
+    if(nums.length === 1) {
+        return nums[0];
+    }else {
+       for(var i = 1;i < nums.length;i++) {
+        // 下面的if判断顺序不要颠倒了，这个if放最后的话筛选出的结果只会是最后一个数字
+            if(count === 0) {
+                count ++;
+                major = nums[i];
+            }
+            if(major === nums[i]) {
+                count ++;
+            }else {
+                count --;
+            }           
+        }
+        return major;
+    }
+};
+console.time("t");
+console.log(majorityElement([3,4,2,4,5,5,3,2,54,54,2,2,1]));
+console.timeEnd("t");

@@ -1,0 +1,33 @@
+题目描述:给定一个目标值，删除数组里所有的目标值并返回新的数组的长度。(注意:不允许再开辟新的空间，只能在原数组中操作)
+
+// 方法一 循环遍历移动
+var removeElement = function(nums,val) {
+    var skipped = 0;
+    var len = nums.length;
+    // 这里for循环里不能写len，这里len的值有变化，len只是记录数组最终长度用的
+    for(var i =0;i < nums.length;i++) {
+        if(nums[i] === val) {
+            skipped++;
+            len--;
+        }
+        if(skipped !== 0) {
+            // 这行代码比较关键
+            nums[i - skipped + 1] = nums[i + 1];
+        }
+    }
+    nums.length = len;
+    return nums;
+};
+console.log(removeElement([3,2,1,2,3],2))
+
+// 方法二  循环遍历调用splice方法
+var removeElement = function(nums,val) {
+    for(var i =0;i < nums.length;i++) {
+        if(nums[i] === val) {
+            nums.splice(i,1);
+            i--;
+        }
+    }
+    return nums;
+};
+console.log(removeElement([3,2,2,3],3))

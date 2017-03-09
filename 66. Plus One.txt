@@ -1,0 +1,16 @@
+// 题目描述 给定一个用数组表示的非负整数，在此基础上加1,以数组的形式显示正确结果
+
+var plusOne = function(digits) {
+    var n = digits.length-1;
+    // for循环里面排除了类似于 9 99 999这些数
+    for(var i=n; i>=0; i--){
+        if(digits[i] < 9) {
+            digits[i] ++;
+            return digits;
+        }
+        digits[i] = 0;              
+    }
+    digits.unshift(1);
+    return digits;
+};
+console.log(plusOne([99]));
