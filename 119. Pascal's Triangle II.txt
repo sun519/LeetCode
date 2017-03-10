@@ -1,0 +1,17 @@
+//题目 帕斯卡三角2  Given an index k, return the kth row of the Pascal's triangle.For example, given k = 3,Return [1,3,3,1].
+// 前提 空间复杂度只能是o(k)
+var getRow = function() {
+    var row = [1];
+    for(var i = 1;i <= rowIndex;i++) {
+        for(var j = i;j > 0;j--) {
+            if(j === i) {
+                row[j] = 1;
+            }else {
+                row[j] = row[j-1] + row[j];
+            }
+        }
+    }
+    return row;
+}
+
+console.log(getRow(3));

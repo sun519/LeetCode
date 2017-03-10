@@ -1,0 +1,17 @@
+题目描述:帕斯卡三角
+var generate = function(numRows) {
+    var arr = [];
+    for(var i = 0; i < numRows;i++) {
+        arr[i] = [];
+        for(var k = 0; k < i+1;k++) {
+            if(k === 0 || k === i) {
+                arr[i][k] = 1;
+            }else {
+                arr[i][k] = arr[i-1][k-1] + arr[i-1][k];
+            }
+        }
+    }
+    return arr;
+};
+
+console.log(generate(5));
