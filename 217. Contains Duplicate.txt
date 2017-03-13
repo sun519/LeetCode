@@ -1,0 +1,12 @@
+题目:查找数组中是否有重复的数有就返回true，没有就返回false
+var containsDuplicate = function(nums) {
+    var obj = {};
+    for(var i = 0;i < nums.length;i++) {
+        if(!obj[nums[i]]) {
+            obj[nums[i]] = true;
+        }else {
+            return true;
+        }
+    }
+    return false;
+};

@@ -1,0 +1,28 @@
+题目:用一个数组表示股票每天的价格，数组的第i个数表示股票在第i天的价格。交易次数不限，但一次只能交易一支股票，也就是说手上最多只能持有一支股票，求最大收益。
+//方法一
+var maxProfit = function(prices) {
+    var max = 0;
+    if(prices.length < 2) {
+        return 0;
+    }
+    for(var i = 1;i < prices.length;i++) {
+        if(prices[i] > prices[i-1]) {
+            max += prices[i] - prices[i-1];
+        }
+    }
+    return max;
+};
+
+console.log(maxProfit([1,8,5,1,6,9,1]));
+
+// 方法二
+var maxProfit = function(prices) {
+    var max = 0;
+    for(var i = 0;i < prices.length-1;i++) {
+        if(prices[i+1] > prices[i]) {
+            max += prices[i+1] - prices[i];
+        }
+    }
+    return max;
+}
+console.log(maxProfit([1,8,5,1,6,9,1]));

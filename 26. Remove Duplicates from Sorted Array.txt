@@ -1,0 +1,33 @@
+题目:有序数组去重获取去重后的长度(前提:尽量不要开辟新空间)
+
+// 方法一 flag标记最终数组长度
+var removeDuplicates = function(nums) {
+    var len = nums.length;
+    var flag = 1;
+    if(len < 2) {
+        return len;
+    }
+    for(var i = 1; i < len;i++) {
+        if(nums[i] !== nums[i-1]) {
+            nums[flag] = nums[i];
+            flag++；
+        }
+    }
+    return flag;
+};
+console.log(removeDuplicates([-1,0,0,0,0,3,3]));
+
+// 方法二: js的splice方法 不开辟新空间，在原数组中操作 
+var removeDuplicates = function(nums) {
+    if(nums.length < 2) {
+        return nums;
+    }
+    for(var i = 0; i < nums.length;i++) {
+        if(nums[i] === nums[i-1]) {
+            nums.splice(i,1);
+            i--;
+        }
+    }
+    return nums.length;
+};
+console.log(removeDuplicates([-1,0,0,0,0,3,3]));

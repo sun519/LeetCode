@@ -1,0 +1,54 @@
+题目:有序数组去重(前提:尽量不要开辟新空间)
+
+// 方法一: js的splice方法 不开辟新空间，在原数组中操作 
+var removeDuplicates = function(nums) {
+    if(nums.length < 2) {
+        return nums;
+    }
+    for(var i = 0; i < nums.length;i++) {
+        if(nums[i] === nums[i-1]) {
+            nums.splice(i,1);
+            i--;
+        }
+    }
+    return nums;
+};
+console.log(removeDuplicates([-1,0,0,0,0,3,3]));
+
+
+// 方法二 flag标记数组最终长度,这里没用splice方法，也没有开辟新空间
+var removeDuplicates = function(nums) {
+    var flag = 1;
+    if(nums.length < 2) {
+        return nums;
+    }
+    for(var i = 1; i < nums.length;i++) {
+        if(nums[i] !== nums[i-1]) { // 如果与前一项不一样
+            nums[flag] = nums[i]; // 当前值赋值给nums[flag],这样能保证数组索引flag之前的数都是不相同的
+            flag++;
+        }
+    }
+    console.log(nums);
+    console.log(flag);
+    nums.length = flag;// 数组的长度为flag
+    return nums;
+};
+console.log(removeDuplicates([-1,0,0,0,0,3,3]));
+
+
+// 方法三 开辟新空间再结合splice,不推荐
+var removeDuplicates = function(nums) {
+    var obj = {};
+    if(nums.length < 2) {
+        return nums;
+    }
+    for(var i = 0; i < nums.length;i++) {
+        if(!obj[nums[i]]) {
+            obj[nums[i]] = true;
+        }else {
+            nums.splice(nums[i],1);
+        }
+    }
+    return nums;
+};
+console.log(removeDuplicates([1,2]));
