@@ -1,0 +1,19 @@
+题目:找出数组中缺失的数字
+// 解题思路 由于不能使用额外空间，并且 1 ≤ a[i] ≤ n ，那么可以使用数组的下标来表示[1,n]。首先扫描array，a[i]出现了,那么我们找到下标为a[i]的元素，将其变为负数，表示下标a[i]出现过。再次扫描array,如果某个元素为正，那么它对应的下标没有出现在数组中，则把它加入最后所求的答案中。
+var findDisappearedNumbers = function(nums) {
+    var res = [];
+    var len = nums.length;
+    for(var i = 0;i < len;i++) {
+        var val = Math.abs(nums[i]) - 1;
+        if(nums[val] > 0) {
+            nums[val] = -nums[val];
+        }
+    }
+    for(var i = 0; i < len; i++) {
+        if(nums[i] > 0) {
+            res.push(i+1);
+        }
+    }
+    return res;
+};
+console.log(findDisappearedNumbers([4,3,2,7,8,2,3,1]));
