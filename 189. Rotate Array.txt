@@ -1,0 +1,36 @@
+// 到置数组 例:For example, with n = 7 and k = 3, the array [1,2,3,4,5,6,7] is rotated to [5,6,7,1,2,3,4]
+//solution 1
+var rotate = function(nums, k) {
+    // 这么做的目的是考虑边界情况，如k=0和k=nums.length,数组为空
+    k = k % nums.length;    
+    while(k--) {
+        nums.unshift(nums.pop());
+    }
+    return nums;
+};
+
+ // solution 2
+var rotate = function(nums, k) {
+    if(nums.length === 0) {
+        return nums;
+    }
+    for(var i = 0;i < k;i++) {
+        nums.unshift(nums.pop());
+    }
+    return nums;
+};
+console.log(rotate([1,2,3,4,5,6,7],3));
+
+
+// 方法三
+var rotate = function(nums, k) {
+    var endIndex = nums.length - k;
+    if(nums.length < 2) {
+        return nums;
+    }
+    for (var i = nums.length - 1;i >= endIndex;i--) {
+        nums.unshift(nums.pop());
+    }
+    return nums;
+};
+console.log(rotate([1,2,3,4,5,6,7],3));

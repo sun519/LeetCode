@@ -1,0 +1,17 @@
+题目:给出一个整数数组，判断该数组内是否有两个元素值是相同的，且他们的索引值相差不大于k，是则返回true，否则返回false
+// 唯一需要注意的是for循环里面的两个判断顺序千万不要颠倒
+var containsNearbyDuplicate = function(nums, k) {
+    var h = {};
+    for(var i = 0;i < nums.length;i++) {
+        // 如果存在h[nums[i]]且当前的i减去之前的赋给h的索引值小于k
+        if(h[nums[i]] !== undefined && i - h[nums[i]] <= k){
+            console.log(h[nums[i]]);
+            return true;
+        }else if(!h[nums[i]]) {
+            h[nums[i]] = i;
+        }
+    }
+    return false;
+}
+
+console.log(containsNearbyDuplicate([-1,-1],1));
