@@ -1,0 +1,20 @@
+Given a triangle, find the minimum path sum from top to bottom. Each step you may move to adjacent numbers on the row below.
+For example, given the following triangle
+[
+     [2],
+    [3,4],
+   [6,5,7],
+  [4,1,8,3]
+]
+The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
+
+var minimumTotal = function(triangle) {
+    for(var i = triangle.length-2;i >= 0;i--) {
+        var prev_floor = triangle[i],
+            next_floor = triangle[i+1];
+        for(var j = 0;j < prev_floor.length;j++) {
+            prev_floor[j] += next_floor[j] < next_floor[j+1] ? next_floor[j] : next_floor[j+1];
+        }
+    }
+    return triangle[0][0];
+};
