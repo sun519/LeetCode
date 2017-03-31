@@ -1,0 +1,19 @@
+题意：给定一个数组，长度大于1.求出除开某个元素的乘积，用数组记录。要求O(1)空间（不考虑输出数组）
+
+解题思路：两次遍历该数组，设当前数组索引为i，第一次求出小于i的所有元素的乘积，第二次求出大于i所有元素的乘积
+var productExceptSelf = function(nums) {
+    var arr = [],
+        r = 1;
+    arr[0] = 1;
+    // 算出i之前的所有元素的乘积
+    for(var i = 1;i < nums.length;i++) {
+        arr[i] = arr[i-1] * nums[i-1];
+    }
+    // 逆序for循环,在i之前所有元素的乘积的基础上再乘以i之后所有元素的乘积
+    for(var j = nums.length - 1;j >= 0;j--) {
+        arr[j] *= r;
+        r *= nums[j];
+    }
+    return arr;
+}
+console.log(productExceptSelf([2,3,4,5]))

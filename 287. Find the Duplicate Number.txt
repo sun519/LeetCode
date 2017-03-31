@@ -1,0 +1,23 @@
+题目：数组大小为n+1，其中只包括1-n的数，根据鸽巢原理，肯定有重复的数，假设只有一个数重复，找出重复的数。
+限制:不能使用额外的空间，不能使用记录或统计出现的数，又不能破坏数组结构，不能通过排序来判断相邻数是否相等。
+// 方案:二分法，因为数出现在[1，n]。所以统计[1-n/2]的数，如果出现小于等于n/2的数个数超过n/2,[1-n/2]数中有重复的数，继续通过二分减少搜索范围，这里的时间复杂度为nlogn。
+var findDuplicate = function(nums) {
+    var high = nums.length - 1;
+        low = 0;
+    while(low != high) {
+        var mid = Math.floor((high + low)/2);
+        var count = 0;
+        for(var i = 0;i < nums.length;i++) {
+            if(nums[i] <= mid) {
+                count ++;
+            }
+        }
+        if(count > mid) {
+            high = mid;
+        }else {
+            low = mid + 1;
+        }
+    }
+    return low;
+}
+console.log(findDuplicate([1,3,2,5,5,4,6,7]));
